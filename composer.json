@@ -46,8 +46,7 @@
         "shopware\/administration": "~v6.2",
         "shopware\/storefront": "~v6.2",
         "shopware\/elasticsearch": "~v6.2",
-        "shopware\/recovery": "~v6.2",
-        ""
+        "shopware\/recovery": "~v6.2"
     },
     "require-dev": {
         "ext-tokenizer": "*",
