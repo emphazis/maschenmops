@@ -1,0 +1,6 @@
+[submodule "custom/static-plugins/maschenmops-theme"]
+	path = custom/static-plugins/maschenmops-theme
+	url = https://github.com/emphazis/maschenmops-theme.git
+[submodule "custom/static-plugins/digital-store-plugin"]
+	path = custom/static-plugins/digital-store-plugin
+	url = https://github.com/emphazis/digital-store-plugin.git
