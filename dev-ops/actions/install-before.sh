@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-__DIR__="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
-cd $__DIR__
+CWD="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+# Increase max_user_watches
+sudo sed -i 's/\(fs.inotify.max_user_watches\)=\([0-9].*\)/\1=52488/g' /etc/sysctl.conf
 
-source ../config.sh
+source $CWD/../config.sh
 
-cd $BASE_PATH
-cp -f "./.env.dist" "./.env"
+# Copy .env.dist to .env
+cp -f "${BASE_PATH}/.env.dist" "${BASE_PATH}/.env"

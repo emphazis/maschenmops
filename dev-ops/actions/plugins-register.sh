@@ -2,8 +2,6 @@
 __DIR__="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 source $__DIR__/../config.sh
 
-cd $CUSTOM_PATH
-
 for dir in $CUSTOM_PATH/static-plugins/*/     # list directories in the form "/tmp/dirname/"
 do
     dir=${dir%*/}      # remove the trailing "/"
