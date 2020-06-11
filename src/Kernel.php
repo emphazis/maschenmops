@@ -48,4 +48,14 @@ class Kernel extends \Shopware\Core\Kernel
             call_user_func('parent::initializeDatabaseConnectionVariables');
         }
     }
+
+    public function getCacheDir(): string
+    {
+        return getenv('CACHE_DIR').'/'.$this->environment.'/cache';
+    }
+
+    public function getLogDir(): string
+    {
+        return getenv('LOG_DIR').'/'.$this->environment.'/log';
+    }
 }

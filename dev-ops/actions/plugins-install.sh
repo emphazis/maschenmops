@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-__DIR__="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
-source $__DIR__/../config.sh
+CWD="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 
-cd $BASE_PATH
+
+cd "$CWD/../.."
 
 bin/console plugin:refresh --no-interaction
 bin/console plugin:install --no-interaction $CUSTOM_PLUGINS

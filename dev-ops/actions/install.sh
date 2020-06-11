@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-__DIR__="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
-cd $__DIR__
+CWD="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 
-source ../config.sh
-
-source $DEV_OPS_ACTIONS_PATH/install-before.sh
-source $DEV_OPS_ACTIONS_PATH/install-main.sh
-source $DEV_OPS_ACTIONS_PATH/install-after.sh
+"$CWD/install-before.sh" && "$CWD/install-main.sh" && "$CWD/install-after.sh"

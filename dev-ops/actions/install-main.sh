@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-__DIR__="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
-cd $__DIR__
-
-source ../config.sh
+CWD="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 
 # Install Plugins
-source $DEV_OPS_ACTIONS_PATH/plugins-register.sh
-source $DEV_OPS_ACTIONS_PATH/plugins-install.sh
+"$CWD/plugins-register.sh" && "$CWD/plugins-install.sh"

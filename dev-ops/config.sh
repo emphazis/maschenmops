@@ -15,3 +15,5 @@ export DEV_OPS_ACTIONS_PATH="${DEV_OPS_PATH}/actions"
 export CUSTOM_PATH="${BASE_PATH}/custom"
 
 export CUSTOM_PLUGINS="DigitalStore MaschenmopsTheme"
+
+export $(egrep -v '^#' "${BASE_PATH}/.env" | xargs)
