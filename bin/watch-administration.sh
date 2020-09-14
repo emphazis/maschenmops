@@ -1,5 +1,4 @@
 #!/bin/bash
-
 CWD="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 
 export PROJECT_ROOT="${PROJECT_ROOT:-"$(dirname $CWD)"}"
@@ -9,5 +8,8 @@ source ${ENV_FILE}
 export HOST=${HOST:-"localhost"}
 export ESLINT_DISABLE
 export PORT
+export APP_URL
 
-npm run --prefix $PROJECT_ROOT/vendor/shopware/administration/Resources/app/administration/ dev -- ${APP_URL}
+bin/console bundle:dump || true
+
+npm run --prefix vendor/shopware/administration/Resources/app/administration/ dev

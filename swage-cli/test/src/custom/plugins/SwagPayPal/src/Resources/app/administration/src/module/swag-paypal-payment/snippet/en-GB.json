@@ -1,0 +1,114 @@
+{
+    "swag-paypal-payment": {
+        "general": {
+            "title": "Orders"
+        },
+        "tabs": {
+            "overview": "Overview"
+        },
+        "paymentDetails": {
+            "cardTitle": "Payment",
+            "invoice": {
+                "heading": "Invoice amount",
+                "totalAmount": "Total amount:",
+                "subTotal": "Subtotal:",
+                "shipping": "Shipping:"
+            },
+            "payment": {
+                "heading": "Payment details",
+                "intent": "Intent:",
+                "paymentId": "Payment ID:",
+                "cartId": "Cart ID:",
+                "state": "State:",
+                "createTime": "Create time:",
+                "updateTime": "Update time:"
+            },
+            "customer": {
+                "heading": "Customer",
+                "payerId": "Payer ID:"
+            },
+            "error": {
+                "title": "Error fetching payment details from PayPal"
+            }
+        },
+        "transactionHistory": {
+            "cardTitle": "Payment History",
+            "states": {
+                "authorization": "Authorization",
+                "sale": "Sale",
+                "refund": "Refund",
+                "capture": "Capture",
+                "order": "Order"
+            },
+            "types": {
+                "type": "Type",
+                "amount": "Amount",
+                "createTime": "Created",
+                "updateTime": "Updated",
+                "state": "State",
+                "trackingId": "Tracking ID",
+                "transactionFee": "Transaction fee",
+                "paymentMode": "Payment mode"
+            }
+        },
+        "buttons": {
+            "label": {
+                "refund": "Create a new refund",
+                "capture": "Capture",
+                "void": "Cancel authorization"
+            }
+        },
+        "modal": {
+            "title": {
+                "refund": "New refund",
+                "capture": "Capture",
+                "void": "Cancel authorization"
+            }
+        },
+        "refundAction": {
+            "successMessage": "Your refund was successful.",
+            "invoiceSelect": {
+                "label": "Select capture"
+            },
+            "refundAmount": {
+                "label": "Amount",
+                "placeholder": "Enter a amount"
+            },
+            "refundDescription": {
+                "label": "Description",
+                "placeholder": "Enter a description"
+            },
+            "refundReason": {
+                "label": "Reason",
+                "placeholder": "Enter a reason"
+            },
+            "refundInvoiceNumber": {
+                "label": "Invoice number",
+                "placeholder": "Enter an invoice number"
+            },
+            "confirmButton": {
+                "text": "Execute"
+            }
+        },
+        "captureAction": {
+            "successMessage": "Your capture was successful.",
+            "maxAmount": "Maximum amount",
+            "currentAmount": "Amount",
+            "isFinal": "This is final capture",
+            "isFinalHint": "Hint: Marked as final capture, although not the entire amount is to be captured.",
+            "button": {
+                "text": "Capture payment"
+            }
+        },
+        "voidAction": {
+            "successMessage": "The payment was successfully voided.",
+            "confirm": {
+                "message": "Do you really want to cancel this payment?",
+                "button": {
+                    "confirm": "Cancel authorization",
+                    "cancel": "No"
+                }
+            }
+        }
+    }
+}

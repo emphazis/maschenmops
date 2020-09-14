@@ -37,16 +37,23 @@
             "options": {
                 "symlink": true
             }
+        }, {
+            "type": "path",
+            "url": "swage-cli\/",
+            "options": {
+                "symlink": true
+            }
         }
     ],
     "require": {
         "php": "~7.2",
         "ocramius\/package-versions": "1.4.0",
-        "shopware\/core": "~v6.2",
-        "shopware\/administration": "~v6.2",
-        "shopware\/storefront": "~v6.2",
-        "shopware\/elasticsearch": "~v6.2",
-        "shopware\/recovery": "~v6.2"
+        "shopware\/core": "~v6.3.0",
+        "shopware\/administration": "~v6.3.0",
+        "shopware\/storefront": "~v6.3.0",
+        "shopware\/elasticsearch": "~v6.3.0",
+        "shopware\/recovery": "~v6.3.0",
+        "bref/bref": "^0.5.26"
     },
     "require-dev": {
         "ext-tokenizer": "*",

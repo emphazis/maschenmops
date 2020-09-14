@@ -123,8 +123,8 @@
             "entryFilePath": "Resources\/app\/storefront\/src\/main.js",
             "webpack": null,
             "styleFiles": [
-                "\/home\/vagrant\/shopware-dev\/vendor\/shopware\/storefront\/Resources\/app\/storefront\/src\/scss\/base.scss",
-                "\/home\/vagrant\/shopware-dev\/vendor\/shopware\/storefront\/Resources\/app\/storefront\/src\/scss\/skin\/shopware\/_base.scss",
+                "\/home\/vagrant\/maschenmops\/vendor\/shopware\/storefront\/Resources\/app\/storefront\/src\/scss\/base.scss",
+                "\/home\/vagrant\/maschenmops\/vendor\/shopware\/storefront\/Resources\/app\/storefront\/src\/scss\/skin\/shopware\/_base.scss",
                 "@Plugins"
             ]
         }
@@ -135,64 +135,6 @@
             "Resources\/views"
         ],
         "technicalName": "elasticsearch",
-        "administration": {
-            "path": "Resources\/app\/administration\/src",
-            "entryFilePath": null,
-            "webpack": null
-        },
-        "storefront": {
-            "path": "Resources\/app\/storefront\/src",
-            "entryFilePath": null,
-            "webpack": null,
-            "styleFiles": []
-        }
-    },
-    "MolliePayments": {
-        "basePath": "custom\/plugins\/MolliePayments\/src\/",
-        "views": [
-            "Resources\/views"
-        ],
-        "technicalName": "mollie-payments",
-        "administration": {
-            "path": "Resources\/app\/administration\/src",
-            "entryFilePath": "Resources\/app\/administration\/src\/main.js",
-            "webpack": null
-        },
-        "storefront": {
-            "path": "Resources\/app\/storefront\/src",
-            "entryFilePath": null,
-            "webpack": null,
-            "styleFiles": []
-        }
-    },
-    "MaschenmopsTheme": {
-        "basePath": "custom\/plugins\/maschenmops-theme\/src\/",
-        "views": [
-            "Resources\/views"
-        ],
-        "technicalName": "maschenmops-theme",
-        "administration": {
-            "path": "Resources\/app\/administration\/src",
-            "entryFilePath": null,
-            "webpack": null
-        },
-        "storefront": {
-            "path": "Resources\/app\/storefront\/src",
-            "entryFilePath": "Resources\/app\/storefront\/src\/main.js",
-            "webpack": null,
-            "styleFiles": [
-                "\/home\/vagrant\/shopware-dev\/custom\/static-plugins\/maschenmops-theme\/src\/Resources\/app\/storefront\/src\/scss\/overrides.scss",
-                "@Storefront",
-                "\/home\/vagrant\/shopware-dev\/custom\/static-plugins\/maschenmops-theme\/src\/Resources\/app\/storefront\/src\/scss\/base.scss"
-            ]
-        }
-    },
-    "DigitalStore": {
-        "basePath": "custom\/plugins\/digital-store-plugin\/src\/",
-        "views": [
-            "Resources\/views"
-        ],
-        "technicalName": "digital-store",
         "administration": {
             "path": "Resources\/app\/administration\/src",
             "entryFilePath": null,

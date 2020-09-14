@@ -1,0 +1,14 @@
+{
+    "name": "swage/inplace",
+    "description": "Replace Shopware/Administration",
+    "type": "library",
+    "license": "non",
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Shopware\\Administration\\": "src\/"
+        }
+    }
+
+}

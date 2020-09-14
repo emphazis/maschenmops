@@ -1,0 +1,20 @@
+{
+    "name": "emphazis/digital-store-plugin",
+    "description": "Sell digital products first.",
+    "type": "shopware-platform-plugin",
+    "version": "v0.0.1",
+    "license": "MIT",
+    "autoload": {
+      "psr-4": {
+        "Emphazis\\DigitalStore\\": "src/"
+      }
+    },
+    "extra": {
+      "shopware-plugin-class": "Emphazis\\DigitalStore\\DigitalStorePlugin",
+      "copyright": "(c) emphazis UG (haftungsbeschraenkt)",
+      "label": {
+        "de-DE": "Digital Market Plugin",
+        "en-GB": "Digital Market Plugin"
+      }
+    }
+  }

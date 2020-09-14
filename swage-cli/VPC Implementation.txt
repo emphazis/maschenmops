@@ -1,0 +1,99 @@
+
+EC2::createVpc([
+    'AmazonProvidedIpv6CidrBlock' => false,
+    'CidrBlock' => '10.0.0.0/16', // REQUIRED
+    'DryRun' => false,
+    'InstanceTenancy' => 'default',
+]);
+
+--> Gibes VPCID: vpc-0335bfad543d3a670
+
+EC2::createInternetGateway([
+
+]);
+
+--> Gives IGW: igw-0145fb9fee013d3dd
+
+EC2::attachInternetGateway([
+    'vpc-id' => vpc-0335bfad543d3a670,
+    'igw' => igw-0145fb9fee013d3dd
+]);
+
+EC2::createRouteTable([
+    'VpcId' => 'vpc-', // REQUIRED
+]);
+
+--> Route Table ID: rtb-0443c62df22cd5987
+
+EC2::createRoute([
+    'DestinationCidrBlock' => '0.0.0.0',
+    'GatewayId' => 'igw-0145fb9fee013d3dd', // REQUIRED
+    'RouteTableId' => 'rtb-',
+]);
+
+EC2::createSubnet([
+    'AvailabilityZone' => 'eu-central-1a', // *-1b *-1c
+    'CidrBlock' => '10.0.1.0/24', // REQUIRED
+    'DryRun' => false,
+    'VpcId' => 'vpc-0335bfad543d3a670', // REQUIRED
+
+]);
+
+--> Subnet ID: subnet-0316e34955304944a
+
+EC2::replaceRouteTableAssociation([
+    'AssociationId' => 'subnet-0316e34955304944a', // REQUIRED
+    'RouteTableId' => 'rtb-0443c62df22cd5987', // REQUIRED
+]);
+
+EC2::createSecurityGroup([
+    'Description' => '<string>', // REQUIRED
+    'DryRun' => true || false,
+    'GroupName' => '<string>', // REQUIRED
+    'VpcId' => '<string>',
+]);
+
+--> SG-ID: sg-djfkdjfkdjf
+
+EC2::authorizeSecurityGroupIngress([
+    'GroupId' => 'sg-903004f8',
+    'IpPermissions' => [
+        [
+            'FromPort' => 80,
+            'IpProtocol' => 'tcp',
+            'IpRanges' => [
+                [
+                    'CidrIp' => '0.0.0.0/0',
+                ],[
+                    'CidrIp' => '::/0',
+                ],
+            ],
+            'ToPort' => 80,
+        ],
+    ],
+]);
+
+
+EC2::createVpcEndpoint([
+    'DryRun' => false,
+    'PolicyDocument' => '{
+        "Statement": [
+            {
+                "Action": "*",
+                "Effect": "Allow",
+                "Resource": "*",
+                "Principal": "*"
+            }
+        ]
+    }',
+    'PrivateDnsEnabled' => false,
+    'RouteTableIds' => ['<string>', ...],
+    'SecurityGroupIds' => ['sg-0cd9eb768b17a3dd2'],
+    'ServiceName' => 'com.amazonaws.eu-central-1.rds', // REQUIRED
+    'SubnetIds' => ['subnet-0316e34955304944a'],
+    'VpcEndpointType' => 'Interface',
+    'VpcId' => '<string>', // REQUIRED
+]);
+
+VPC Endpoint ID
+vpce-0e7f4de31e08a1f14

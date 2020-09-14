@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 CWD="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
-
-
-cd "$CWD/../.."
+source "$CWD/../config.sh"
 
 bin/console plugin:refresh --no-interaction
 bin/console plugin:install --no-interaction $CUSTOM_PLUGINS

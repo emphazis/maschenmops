@@ -1,0 +1,43 @@
+{
+    "name": "storefront/artifact",
+    "type": "project",
+    "license": "MIT",
+    "config": {
+        "optimize-autoloader": true
+    },
+    "prefer-stable": true,
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Shopware\\Production\\": "src\/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "custom\/static-plugins\/*",
+            "options": {
+                "symlink": true
+            }
+        }, {
+            "type": "path",
+            "url": "swage-inplace"
+        }
+    ],
+    "require": {
+        "php": "~7.2",
+        "shopware\/core": "~v6.2",
+        "shopware\/storefront": "~v6.2",
+        "bref\/bref": "^0.5.26",
+        "ocramius\/package-versions": "1.4.0",
+        "swage/inplace": "@dev"
+    },
+    "require-dev": {
+        "symfony\/web-profiler-bundle": "~4.4",
+        "symfony\/stopwatch": "~4.4"
+    },
+    "replace": {
+        "google\/apiclient": "*",
+        "google\/cloud-storage": "*"
+    }
+}

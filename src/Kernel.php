@@ -51,11 +51,30 @@ class Kernel extends \Shopware\Core\Kernel
 
     public function getCacheDir(): string
     {
-        return getenv('CACHE_DIR').'/'.$this->environment.'/cache';
+         // When on the lambda only /tmp is writeable
+         if (isset($_SERVER['LAMBDA_TASK_ROOT'])) {
+            return '/tmp/cache/'.$this->environment;
+        }
+
+        return sprintf(
+            '%s/var/cache/%s_h%s',
+            $this->getProjectDir(),
+            $this->getEnvironment(),
+            $this->getCacheHash()
+        );
+        
     }
 
     public function getLogDir(): string
     {
-        return getenv('LOG_DIR').'/'.$this->environment.'/log';
+        // When on the lambda only /tmp is writeable
+        if (isset($_SERVER['LAMBDA_TASK_ROOT'])) {
+            return '/tmp/log/';
+        }
+
+        return sprintf(
+            '%s/var/log',
+            $this->getProjectDir()
+        );
     }
 }

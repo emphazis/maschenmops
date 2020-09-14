@@ -1,0 +1,24 @@
+{
+    "name": "swage/swage-cli",
+    "description": "The CLI",
+    "type": "library",
+    "license": "non",
+    "minimum-stability": "dev",
+    "require": {
+        "symfony/console": "^5.2@dev",
+        "symfony/yaml": "^5.2@dev",
+        "illuminate/support": "^7.15",
+        "symfony/filesystem": "^5.2@dev",
+        "symfony/process": "^5.2@dev",
+        "symfony/finder": "^5.2@dev",
+        "aws/aws-sdk-php": "^3.0@dev",
+        "bref/bref": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Swage\\Cli\\": "src\/"
+        },
+        "classmap": ["src"]
+    }
+
+}

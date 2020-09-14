@@ -1,0 +1,34 @@
+service: maschenmops
+
+provider:
+    name: aws
+    region: eu-central-1
+    runtime: provided
+    environment:
+        # Symfony environment variables
+        APP_ENV: prod
+        APP_SECRET: 8583a6ff63c5894a3195331701749943
+
+plugins:
+    - ./vendor/bref/bref
+
+package:
+    exclude:
+        - node_modules/**
+        - tests/**
+
+functions:
+    website:
+        handler: public/index.php
+        timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
+        layers:
+            - ${bref:layer.php-73-fpm}
+        events:
+            -   http: 'ANY /'
+            -   http: 'ANY /{proxy+}'
+    console:
+        handler: bin/console
+        timeout: 120 # in seconds
+        layers:
+            - ${bref:layer.php-73} # PHP
+            - ${bref:layer.console} # The "console" layer

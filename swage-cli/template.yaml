@@ -1,0 +1,89 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: A sample SAM template for deploying Lambda functions.
+
+Resources:
+  # Lambda Resources
+  Storefront:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: storefront-function
+      Handler: src/public/index.php
+      Runtime: provided
+      Timeout: 60
+      CodeUri: __TASK_LAYER__
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          PROJECT_ROOT: "/opt/src"
+          BREF_AUTOLOAD_PATH: "/opt/src/vendor/autoload.php"
+          SWAGE_AUTOLOAD_PATH: "/opt/src/vendor/autoload.php"
+          APP_ENV: "prod"
+      Events:
+        Http:
+          Type: Api
+          Properties:
+            Path: /
+            Method: ANY
+        HttpProx:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+      Layers:
+        - 'arn:aws:lambda:eu-central-1:209497400698:layer:php-73-fpm:25'
+        - '__VENDOR_LAYER__'
+        - '__SRC_LAYER__'
+    DependsOn:
+      - LambdaExecutionRole
+  
+  Console:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: swage-console
+      Handler: src/bin/console
+      Runtime: provided
+      Timeout: 300
+      CodeUri: __TASK_LAYER__
+      Environment:
+        Variables:
+          PROJECT_ROOT: "/opt/src"
+          BREF_AUTOLOAD_PATH: "/opt/src/vendor/autoload.php"
+          SWAGE_AUTOLOAD_PATH: "/opt/src/vendor/autoload.php"
+          APP_ENV: "prod"
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Layers:
+        - 'arn:aws:lambda:eu-central-1:209497400698:layer:php-73:25'
+        - 'arn:aws:lambda:eu-central-1:209497400698:layer:console:25'
+        - '__VENDOR_LAYER__'
+        - '__SRC_LAYER__'
+    DependsOn:
+      - LambdaExecutionRole
+  # Roles
+  LambdaExecutionRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+              - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+          - Effect: Allow
+            Principal:
+              Service:
+              - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: "/service-role/"
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: '*'
+                Resource: '*'

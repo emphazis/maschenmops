@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<psalm
+    autoloader="bin/static-analyze-autoloader.php"
+    findUnusedVariablesAndParams="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src"/>
+        <directory name="tests"/>
+        <ignoreFiles>
+            <directory name="../../../platform"/> <!-- would otherwise inspect Shopware -->
+            <directory name="../../../vendor"/> <!-- would otherwise inspect vendor -->
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <LessSpecificImplementedReturnType>
+            <!-- <deprecated> tag:v2.0.0 - Remove once the Token class is final -->
+            <errorLevel type="info">
+                <file name="src/PayPal/Api/Token.php"/>
+            </errorLevel>
+        </LessSpecificImplementedReturnType>
+        <DeprecatedClass>
+            <!-- <deprecated> tag:v2.0.0 - Remove once the Token class is final -->
+            <errorLevel type="info">
+                <referencedClass name="Swag\PayPal\PayPal\Api\Token"/>
+            </errorLevel>
+        </DeprecatedClass>
+
+        <InvalidReturnType>
+            <errorLevel type="info">
+                <directory name="tests/Mock"/>
+            </errorLevel>
+        </InvalidReturnType>
+
+        <DocblockTypeContradiction>
+            <errorLevel type="info">
+                <file name="src/PayPal/Api/Common/PayPalStruct.php"/>
+            </errorLevel>
+        </DocblockTypeContradiction>
+
+        <InternalMethod>
+            <errorLevel type="info">
+                <directory name="tests"/>
+            </errorLevel>
+        </InternalMethod>
+
+        <DeprecatedTrait>
+            <errorLevel type="info">
+                <directory name="tests"/>
+            </errorLevel>
+        </DeprecatedTrait>
+
+        <DeprecatedMethod>
+            <errorLevel type="info">
+                <directory name="tests"/>
+            </errorLevel>
+        </DeprecatedMethod>
+
+        <!-- level 3 issues - slightly lazy code writing, but provably low false-negatives -->
+
+        <PropertyNotSetInConstructor errorLevel="info"/>
+        <MissingConstructor errorLevel="info"/>
+
+        <UnresolvableInclude errorLevel="info"/>
+
+        <!-- level 4 issues - points to possible deficiencies in logic, higher false-positives -->
+        <TypeCoercion errorLevel="info"/>
+        <PossiblyNullArgument errorLevel="info"/>
+
+    </issueHandlers>
+</psalm>

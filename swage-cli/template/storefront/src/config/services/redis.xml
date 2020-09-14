@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <services>
+        <service id="Redis" class="Redis">
+            <call method="connect">
+                <argument>127.0.0.1</argument>
+                <argument>6379</argument>
+            </call>
+
+            <!-- uncomment the following if your Redis server requires a password:
+            <call method="auth">
+                <argument>%env(int:default:redis_secret_default:REDIS_SECRET)%</argument>
+            </call> -->
+        </service>
+
+         <service id="monolog_redis_handler" class="Monolog\Handler\RedisHandler">
+            <argument type="service" id="Redis" />
+            <argument>monolog</argument>
+        </service>
+
+    </services>
+</container>

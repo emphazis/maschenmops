@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpCache\HttpCache;
 use Doctrine\DBAL\Connection;
 
+
 if (PHP_VERSION_ID < 70200) {
     header('Content-type: text/html; charset=utf-8', true, 503);
 
@@ -59,6 +60,8 @@ if (!isset($_SERVER['APP_ENV']) && !isset($_ENV['APP_ENV'])) {
         (new Dotenv(true))->load($envFile);
     }
 }
+
+// dd($_ENV['MAILER_URL']);
 
 $appEnv = $_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? 'dev';
 $debug = (bool) ($_SERVER['APP_DEBUG'] ?? $_ENV['APP_DEBUG'] ?? ('prod' !== $appEnv));

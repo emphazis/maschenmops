@@ -1,0 +1,116 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: A sample SAM template for deploying Lambda functions.
+
+Resources:
+# DBSubnetGroup
+  auroraSubnetGroup: 
+    Type: "AWS::RDS::DBSubnetGroup"
+    Properties: 
+      DBSubnetGroupDescription: "The DBSubnetGroup for AuroraCluster"
+      SubnetIds: 
+        - subnet-7b5b4112
+        - subnet-7b5b4115
+# Databases
+  AuroraCluster:
+    Type: 'AWS::RDS::DBCluster'
+    Properties:
+      MasterUsername: swageuser
+      MasterUserPassword: swagepwd
+      DBClusterIdentifier: swage-serverless-cluster
+      Engine: aurora
+      EngineVersion: 5.6.10a
+      EngineMode: serverless
+      ScalingConfiguration:
+        AutoPause: true
+        MinCapacity: 1
+        MaxCapacity: 4
+        SecondsUntilAutoPause: 300
+# Lambda
+  Storefront:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: storefront-function
+      Handler: src/public/index.php
+      Runtime: provided
+      CodeUri: __TASK_LAYER__
+      Environment:
+        Variables:
+          PROJECT_ROOT: "/opt/src"
+          BREF_AUTOLOAD_PATH: "/opt/src/vendor/autoload.php"
+          SWAGE_AUTOLOAD_PATH: "/opt/src/vendor/autoload.php"
+      Events:
+        Http:
+          Type: Api
+          Properties:
+            Path: /
+            Method: ANY
+        HttpProx:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+        # Grants this function permission to call lambda:InvokeFunction
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+          - Effect: "Allow"
+            Action:
+              - "lambda:InvokeFunction"
+            Resource: '*'
+      Layers:
+        - 'arn:aws:lambda:eu-central-1:209497400698:layer:php-73-fpm:25'
+        - '__VENDOR_LAYER__'
+        - '__SRC_LAYER__'
+  Console:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: swage-console
+      Handler: src/bin/console
+      Runtime: provided
+      CodeUri: __TASK_LAYER__
+      Environment:
+        Variables:
+          PROJECT_ROOT: "/opt/src"
+          BREF_AUTOLOAD_PATH: "/opt/src/vendor/autoload.php"
+          SWAGE_AUTOLOAD_PATH: "/opt/src/vendor/autoload.php"
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+          - Effect: "Allow"
+            Action:
+              - "lambda:InvokeFunction"
+            Resource: '*'
+      Layers:
+        - 'arn:aws:lambda:eu-central-1:209497400698:layer:php-73:25'
+        - 'arn:aws:lambda:eu-central-1:209497400698:layer:console:25'
+        - '__VENDOR_LAYER__'
+        - '__SRC_LAYER__'
+
+  RootRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+              - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+          - Effect: Allow
+            Principal:
+              Service:
+              - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: /
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: '*'
+                Resource: '*'

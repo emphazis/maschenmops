@@ -1,0 +1,6 @@
+aws_id: testee
+aws:
+    region: "eu-central-1"
+    version: "1"
+    key: "AKIAYVYTWQ2KS3JMGMCE"
+    secret: "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"

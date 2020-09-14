@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+ 
+use Symfony\Component\Console\Application;
+use Swage\Cli\Command\{
+    Console,
+    DeployCommand,
+    InitCommand,
+    PackageCommand
+};
+
+$cwd = realpath(__DIR__."/../..");
+ 
+$app = new Application();
+$app->add(new Console($cwd));
+$app->add(new InitCommand($cwd));
+$app->add(new PackageCommand($cwd));
+$app->add(new DeployCommand($cwd));
+$app->run();

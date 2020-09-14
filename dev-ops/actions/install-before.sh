@@ -11,4 +11,4 @@ cd "$CWD/../.."
 # cp -f "./.env.dist" "./.env"
 
 # Composer install
-composer install -o --prefer-dist --no-dev
+composer install

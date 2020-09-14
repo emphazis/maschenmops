@@ -1,3 +1,6 @@
+/swage-artifacts/
+/.serverless/
+
 custom/*
 !custom/plugins/.gitkeep
 !custom/static-plugins/
