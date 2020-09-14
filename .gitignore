@@ -1,5 +1,5 @@
-/swage-artifacts/
-/.serverless/
+swage-artifacts/
+.serverless/
 
 custom/*
 !custom/plugins/.gitkeep
